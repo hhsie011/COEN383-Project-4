@@ -9,8 +9,9 @@ void init(Memory* mem) {
     Page* last = NULL;
     for (int i = 0; i < MEM_SIZE; ++i) {
         Page* p = malloc(sizeof(Page));
+        p->number = -1;
         p->lastUsed = -1;
-        p->hits = 0;
+        p->numRef = 0;
         p->next = NULL;
         if (mem->freePages == NULL) {
             mem->freePages = p;

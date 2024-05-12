@@ -2,8 +2,9 @@
 #define __PAGE_H__
 
 typedef struct Page {
+    int number;
     int lastUsed; // for LRU
-    int hits; // for LFU and MFU
+    int numRef; // for LFU and MFU
     struct Page* next;
 } Page;
 
