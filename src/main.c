@@ -72,6 +72,7 @@ int main() {
     Stat aggregate;
     aggregate.hits = 0;
     aggregate.misses = 0;
+    aggregate.swaps = 0;
 
     // Run FIFO
     printf("=============================================================================\n");
@@ -82,12 +83,16 @@ int main() {
         FirstInFirstOut(arrivalQueue[i], 0, &singleRun);
         aggregate.hits += singleRun.hits;
         aggregate.misses += singleRun.misses;
+        aggregate.swaps += singleRun.swaps;
         printf("\nHit/miss ratio: %f\n\n\n", ((double) singleRun.hits) / singleRun.misses);
     }
 
-    printf("Hit/miss ratio (Average over 5 runs): %f\n\n\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Hit/miss ratio (Average over 5 runs): %f\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Average number of processes swapped-in: %f\n\n\n", ((double) aggregate.swaps) / NUM_SETS);
+    
     aggregate.hits = 0;
     aggregate.misses = 0;
+    aggregate.swaps = 0;
 
     // Run LRU
     printf("=============================================================================\n");
@@ -98,12 +103,16 @@ int main() {
         LeastRecentlyUsed(arrivalQueue[i], 0, &singleRun);
         aggregate.hits += singleRun.hits;
         aggregate.misses += singleRun.misses;
+        aggregate.swaps += singleRun.swaps;
         printf("\nHit/miss ratio: %f\n\n\n", ((double) singleRun.hits) / singleRun.misses);
     }
 
-    printf("Hit/miss ratio (Average over 5 runs): %f\n\n\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Hit/miss ratio (Average over 5 runs): %f\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Average number of processes swapped-in: %f\n\n\n", ((double) aggregate.swaps) / NUM_SETS);
+
     aggregate.hits = 0;
     aggregate.misses = 0;
+    aggregate.swaps = 0;
 
     // Run LFU
     printf("=============================================================================\n");
@@ -114,12 +123,16 @@ int main() {
         LeastFrequentlyUsed(arrivalQueue[i], 0, &singleRun);
         aggregate.hits += singleRun.hits;
         aggregate.misses += singleRun.misses;
+        aggregate.swaps += singleRun.swaps;
         printf("\nHit/miss ratio: %f\n\n\n", ((double) singleRun.hits) / singleRun.misses);
     }
 
-    printf("Hit/miss ratio (Average over 5 runs): %f\n\n\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Hit/miss ratio (Average over 5 runs): %f\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Average number of processes swapped-in: %f\n\n\n", ((double) aggregate.swaps) / NUM_SETS);
+
     aggregate.hits = 0;
     aggregate.misses = 0;
+    aggregate.swaps = 0;
 
     // Run MFU
     printf("=============================================================================\n");
@@ -130,12 +143,16 @@ int main() {
         MostFrequentlyUsed(arrivalQueue[i], 0, &singleRun);
         aggregate.hits += singleRun.hits;
         aggregate.misses += singleRun.misses;
+        aggregate.swaps += singleRun.swaps;
         printf("\nHit/miss ratio: %f\n\n\n", ((double) singleRun.hits) / singleRun.misses);
     }
 
-    printf("Hit/miss ratio (Average over 5 runs): %f\n\n\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Hit/miss ratio (Average over 5 runs): %f\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Average number of processes swapped-in: %f\n\n\n", ((double) aggregate.swaps) / NUM_SETS);
+
     aggregate.hits = 0;
     aggregate.misses = 0;
+    aggregate.swaps = 0;
 
     // Run Random Pick
     printf("=============================================================================\n");
@@ -146,12 +163,12 @@ int main() {
         Random(arrivalQueue[i], 0, &singleRun);
         aggregate.hits += singleRun.hits;
         aggregate.misses += singleRun.misses;
+        aggregate.swaps += singleRun.swaps;
         printf("\nHit/miss ratio: %f\n\n\n", ((double) singleRun.hits) / singleRun.misses);
     }
 
-    printf("Hit/miss ratio (Average over 5 runs): %f\n\n\n", ((double) aggregate.hits) / aggregate.misses);
-    aggregate.hits = 0;
-    aggregate.misses = 0;
+    printf("Hit/miss ratio (Average over 5 runs): %f\n", ((double) aggregate.hits) / aggregate.misses);
+    printf("Average number of processes swapped-in: %f\n\n\n", ((double) aggregate.swaps) / NUM_SETS);
 
     // Simulate 100 page references per run
     printf("=============================================================================\n");

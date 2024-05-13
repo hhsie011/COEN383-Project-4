@@ -1508,6 +1508,7 @@ Hit/miss ratio: 1.029371
 
 
 Hit/miss ratio (Average over 5 runs): 1.062366
+Average number of processes swapped-in: 150.000000
 
 
 =============================================================================
@@ -3019,6 +3020,7 @@ Hit/miss ratio: 1.048471
 
 
 Hit/miss ratio (Average over 5 runs): 1.078276
+Average number of processes swapped-in: 150.000000
 
 
 =============================================================================
@@ -4530,6 +4532,7 @@ Hit/miss ratio: 0.883600
 
 
 Hit/miss ratio (Average over 5 runs): 0.917368
+Average number of processes swapped-in: 150.000000
 
 
 =============================================================================
@@ -6041,6 +6044,7 @@ Hit/miss ratio: 0.939840
 
 
 Hit/miss ratio (Average over 5 runs): 0.944371
+Average number of processes swapped-in: 150.000000
 
 
 =============================================================================
@@ -7552,6 +7556,7 @@ Hit/miss ratio: 1.063033
 
 
 Hit/miss ratio (Average over 5 runs): 1.033134
+Average number of processes swapped-in: 150.000000
 
 
 =============================================================================
