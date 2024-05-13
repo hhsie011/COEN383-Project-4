@@ -2,6 +2,7 @@
 #define __MEMORY_H__
 
 #include "page.h"
+#include "proc.h"
 
 #define MEM_SIZE 100
 
@@ -12,5 +13,7 @@ typedef struct Memory
 } Memory;
 
 void init(Memory*);
+void assignPages(Memory*, Proc*);
+void returnPages(Memory*, Proc*);
 
 #endif

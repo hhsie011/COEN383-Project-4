@@ -1,37 +1,41 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "../header/queue.h"
 
-
-// Add job to back of the queue
-void addJob(Queue* q, Job* j) {
-    Job* temp = q->head;
+// Add job to end of the queue
+void addJob(Queue* queue, Job* job) {
+    Job* temp = queue->head;
     Job* prev = NULL;
     while (temp != NULL) {
         prev = temp;
         temp = temp->next;
     }
     if (prev == NULL) {
-        q->head = j;
+        queue->head = job;
         return;
     }
-    prev->next = j;
+    prev->next = job;
+    
 }
 
-// Remove the specified job from the queue
-void popJob(Queue* q, Job* j) {
-    Job* temp = q->head;
+// Remove specified job from the queue
+void removeJob(Queue* queue, Job* job) {
+    if (queue == NULL) {
+        return;
+    }
+    Job* temp = queue->head;
     Job* prev = NULL;
-    while (temp != NULL && temp != j) {
+    while (temp != NULL && temp != job) {
         prev = temp;
         temp = temp->next;
     }
-    if (temp == NULL) {
-        return;
-    }
+    Job* successor = temp->next;
+    // printf("Hello world!\n");
+    temp->next = NULL;
     if (prev == NULL) {
-        q->head = temp->next;
+        queue->head = successor;
         return;
     }
-    prev->next = temp->next;
+    prev->next = successor;
 }

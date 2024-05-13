@@ -7,4 +7,7 @@ typedef struct Queue {
     Job* head;
 } Queue;
 
+void addJob(Queue*, Job*);
+void removeJob(Queue*, Job*);
+
 #endif

@@ -3,8 +3,9 @@
 
 typedef struct Page {
     int number;
+    int assignTime; // for FIFO
     int lastUsed; // for LRU
-    int numRef; // for LFU and MFU
+    int refCnt; // for LFU and MFU
     struct Page* next;
 } Page;
 

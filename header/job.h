@@ -5,6 +5,7 @@
 
 typedef struct Job {
     Proc* proc;
+    int runtime;    // in msec
     struct Job* next;
 } Job;
 

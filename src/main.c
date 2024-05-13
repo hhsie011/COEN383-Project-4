@@ -4,11 +4,9 @@
 #include "../header/proc.h"
 #include "../header/queue.h"
 #include "../header/memory.h"
+#include "../header/algo.h"
 
 const int NUM_SETS = 5;
-const int NUM_PROC = 150;
-const int SIM_TIME_SEC = 60;
-const int SEC_TO_MSEC = 1000;
 
 int comparator(const void* p1, const void* p2) {
     Proc*  proc1 = (Proc*)p1;
@@ -52,6 +50,10 @@ int main() {
             arrivalQueue[i][j].arrivalTime = rand() % SIM_TIME_SEC;
             // Assign process service duration
             arrivalQueue[i][j].serviceTime = (rand() % 5) + 1;
+            // Assign first page process references (page-0 by default)
+            arrivalQueue[i][j].pageRef = 0;
+            // Assign process pages in memory
+            arrivalQueue[i][j].inMem = NULL;
         }
 
         // Sort queue based on process arrival time
@@ -61,8 +63,11 @@ int main() {
         //     printf("Process name: %c, Arrival time: %d\n", arrivalQueue[i][j].name, arrivalQueue[i][j].arrivalTime);
         // }
     }
-    
+
     // Run the algorithms
+    for (int i = 0; i < NUM_SETS; ++i) {
+        FirstInFirstOut(arrivalQueue[i]);
+    }
 
     // Free dynamic allocated memory
     for (int i = 0; i < NUM_SETS; ++i) {
