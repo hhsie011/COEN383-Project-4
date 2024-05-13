@@ -63,10 +63,12 @@ void Random(Proc* arrivalQueue, int shortSim, Stat* stat) {
         if (runningQueue != NULL && runningQueue->head != NULL) {
             Job* temp = runningQueue->head;
             while (temp != NULL) {
-                // printf("Name: %c\n", temp->proc->name);
                 // Find if new page referenced is in memory
                 if (isInMem(temp->proc)) {
                     hits++;
+                    if (shortSim) {
+                        printReference(temp->proc, timeMsec, 1, -1);
+                    }
                 }
                 else {
                     misses++;
@@ -81,6 +83,9 @@ void Random(Proc* arrivalQueue, int shortSim, Stat* stat) {
                             pgEvict = pgEvict->next;
                         }
                         if (pgEvict != NULL) {
+                            if (shortSim) {
+                                printReference(temp->proc, timeMsec, 0, pgEvict->number);
+                            }
                             pgEvict->number = temp->proc->pageRef;
                         }
                     }
@@ -118,9 +123,12 @@ void Random(Proc* arrivalQueue, int shortSim, Stat* stat) {
     // printf("Hits: %d\n", hits);
     // printf("Misses: %d\n", misses);
     // printf("Swaps: %d\n\n", swaps);
-    stat->hits = hits;
-    stat->misses = misses;
-    
+    if (stat) {
+        stat->hits = hits;
+        stat->misses = misses;
+        stat->swaps = swaps;
+    }
+
     // Free dynamic memory
     free(mem);
     mem = NULL;

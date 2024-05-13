@@ -13,6 +13,6 @@ void printCompletion(Proc* proc, int timestamp) {
 }
 
 void printReference(Proc* proc, int timestamp, int pageInMem, int pgEvicted) {
-    printf("Timestamp: %d, Process name: %c, Page referenced: %c, Page in memory (1=yes, 0=no): %d, Page evicted (-1=N/A): %d\n", 
+    printf("Timestamp: %d, Process name: %c, Page referenced: %d, Page in memory (1=yes, 0=no): %d, Page evicted (-1=N/A): %d\n", 
         timestamp / SEC_TO_MSEC, proc->name, proc->pageRef, pageInMem, pgEvicted);
 }

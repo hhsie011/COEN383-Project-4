@@ -4,6 +4,7 @@
 typedef struct Stat {
     int hits;
     int misses;
+    int swaps;
 } Stat;
 
 #endif

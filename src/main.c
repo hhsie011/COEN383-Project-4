@@ -153,6 +153,56 @@ int main() {
     aggregate.hits = 0;
     aggregate.misses = 0;
 
+    // Simulate 100 page references per run
+    printf("=============================================================================\n");
+    printf("Part 2: Simulate 100 Page References Per Run\n");
+
+    // Run FIFO
+    printf("=============================================================================\n");
+    printf("First In, First Out (FIFO)\n\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        printf("Run #%d\n", i + 1);
+        Stat singleRun;
+        FirstInFirstOut(arrivalQueue[i], 1, NULL);
+        printf("\n\n\n");
+    }
+
+    // Run LRU
+    printf("=============================================================================\n");
+    printf("Least Recently Used (LRU)\n\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        printf("Run #%d\n", i + 1);
+        LeastRecentlyUsed(arrivalQueue[i], 1, NULL);
+        printf("\n\n\n");
+    }
+
+    // Run LFU
+    printf("=============================================================================\n");
+    printf("Least Frequently Used (LFU)\n\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        printf("Run #%d\n", i + 1);
+        LeastFrequentlyUsed(arrivalQueue[i], 1, NULL);
+        printf("\n\n\n");
+    }
+
+    // Run MFU
+    printf("=============================================================================\n");
+    printf("Most Frequently Used (MFU)\n\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        printf("Run #%d\n", i + 1);
+        MostFrequentlyUsed(arrivalQueue[i], 1, NULL);
+        printf("\n\n\n");
+    }
+
+    // Run Random Pick
+    printf("=============================================================================\n");
+    printf("Random Pick\n\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        printf("Run #%d\n", i + 1);
+        Random(arrivalQueue[i], 1, NULL);
+        printf("\n\n\n");
+    }
+
     // Free dynamic allocated memory
     for (int i = 0; i < NUM_SETS; ++i) {
         free(arrivalQueue[i]);
