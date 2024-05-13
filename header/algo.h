@@ -12,5 +12,6 @@ void FirstInFirstOut(Proc*);
 void LeastRecentlyUsed(Proc*);
 void LeastFrequentlyUsed(Proc*);
 void MostFrequentlyUsed(Proc*);
+void Random(Proc*);
 
 #endif
