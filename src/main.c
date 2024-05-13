@@ -70,11 +70,21 @@ int main() {
     for (int i = 0; i < NUM_SETS; ++i) {
         FirstInFirstOut(arrivalQueue[i]);
     }
+
+    // Run LRU
     printf("=============================================================================\n");
     printf("Least Recently Used (LRU)\n");
     for (int i = 0; i < NUM_SETS; ++i) {
         LeastRecentlyUsed(arrivalQueue[i]);
     }
+
+    // Run LFU
+    printf("=============================================================================\n");
+    printf("Least Frequently Used (LFU)\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        LeastFrequentlyUsed(arrivalQueue[i]);
+    }
+
 
     // Free dynamic allocated memory
     for (int i = 0; i < NUM_SETS; ++i) {

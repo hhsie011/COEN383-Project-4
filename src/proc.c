@@ -10,7 +10,7 @@ int getNextRef(int procSize, int currRef) {
         if (!currRef) {
             return currRef + (rand() % 2);
         }
-        // Check if current reference is page-<>
+        // Check if current reference is page-<process size - 1>
         if (currRef == procSize - 1) {
             return currRef - (rand() % 2); 
         }

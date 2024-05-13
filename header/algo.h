@@ -10,5 +10,6 @@
 
 void FirstInFirstOut(Proc*);
 void LeastRecentlyUsed(Proc*);
+void LeastFrequentlyUsed(Proc*);
 
 #endif
