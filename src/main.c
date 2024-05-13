@@ -64,9 +64,16 @@ int main() {
         // }
     }
 
-    // Run the algorithms
+    // Run FIFO
+    printf("=============================================================================\n");
+    printf("First In, First Out (FIFO)\n");
     for (int i = 0; i < NUM_SETS; ++i) {
         FirstInFirstOut(arrivalQueue[i]);
+    }
+    printf("=============================================================================\n");
+    printf("Least Recently Used (LRU)\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        LeastRecentlyUsed(arrivalQueue[i]);
     }
 
     // Free dynamic allocated memory

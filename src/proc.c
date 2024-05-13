@@ -24,20 +24,20 @@ int getNextRef(int procSize, int currRef) {
 }
 
 // Find if page is in memory
-// 1 - page is in memory
-// 0 - page is not in memory
-int isInMem(Proc* proc) {
+// pointer to page - page is in memory
+// NULL - page is not in memory
+Page* isInMem(Proc* proc) {
     if (proc == NULL) {
-        return 0;
+        return NULL;
     }
     Page* temp = proc->inMem;
     while (temp != NULL) {
         if (temp->number == proc->pageRef) {
-            return 1;
+            return temp;
         }
         temp = temp->next;
     }
-    return 0;
+    return NULL;
 }
 
 // Get free page

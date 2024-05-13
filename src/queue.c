@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "../header/queue.h"
 
@@ -31,7 +30,6 @@ void removeJob(Queue* queue, Job* job) {
         temp = temp->next;
     }
     Job* successor = temp->next;
-    // printf("Hello world!\n");
     temp->next = NULL;
     if (prev == NULL) {
         queue->head = successor;

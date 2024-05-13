@@ -5,7 +5,7 @@
 #include "../header/algo.h"
 #include "../header/queue.h"
 
-void FirstInFirstOut(Proc* arrivalQueue) {
+void LeastRecentlyUsed(Proc* arrivalQueue) {
     // Initialize virutal memory
     Memory* mem = malloc(sizeof(Memory));
     init(mem);
@@ -59,35 +59,37 @@ void FirstInFirstOut(Proc* arrivalQueue) {
             while (temp != NULL) {
                 // printf("Name: %c\n", temp->proc->name);
                 // Find if new page referenced is in memory
-                if (isInMem(temp->proc)) {
+                Page* refPg;
+                if ((refPg = isInMem(temp->proc))) {
                     hits++;
+                    refPg->lastUsed = timeMsec;
                 }
                 else {
                     misses++;
                     // Try to get a free page
                     Page* freePg = getFreePage(temp->proc->inMem);
-                    // If there is no more free page, evict the oldest page
+                    // If there is no more free page, evict the least recently used page
                     if (freePg == NULL) {
-                        // Find the oldest page in memory
-                        int timeInMem = __INT_MAX__;
+                        // Find the least recently used page in memory
+                        int lastRef = __INT_MAX__;
                         Page* pgEvict = NULL;
                         Page* pg = temp->proc->inMem;
                         while (pg != NULL) {
-                            if (pg->assignTime < timeInMem) {
-                                timeInMem = pg->assignTime;
+                            if (pg->lastUsed < lastRef) {
+                                lastRef = pg->lastUsed;
                                 pgEvict = pg;
                             }
                             pg = pg->next;
                         }
                         if (pgEvict != NULL) {
                             pgEvict->number = temp->proc->pageRef;
-                            pgEvict->assignTime = timeMsec;
+                            pgEvict->lastUsed = timeMsec;
                         }
                     }
                     // If there is a free page, no need to evict
                     else {
                         freePg->number = temp->proc->pageRef;
-                        freePg->assignTime = timeMsec;
+                        freePg->lastUsed = timeMsec;
                     }
                 }
                 temp->runtime += PERIOD_MSEC;
@@ -102,6 +104,8 @@ void FirstInFirstOut(Proc* arrivalQueue) {
                     temp = nextJob;
                     continue;
                 }
+                // Record time referenced
+                
                 // Get new page reference
                 temp->proc->pageRef = getNextRef(temp->proc->size, temp->proc->pageRef);
                 temp = temp->next;

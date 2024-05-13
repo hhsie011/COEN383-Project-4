@@ -9,5 +9,6 @@
 #define PERIOD_MSEC 100
 
 void FirstInFirstOut(Proc*);
+void LeastRecentlyUsed(Proc*);
 
 #endif

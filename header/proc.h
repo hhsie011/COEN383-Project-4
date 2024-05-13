@@ -15,7 +15,7 @@ typedef struct Proc {
 } Proc;
 
 int getNextRef(int, int);
-int isInMem(Proc*);
+Page* isInMem(Proc*);
 Page* getFreePage(Page*);
 
 #endif
