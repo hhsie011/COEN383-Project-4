@@ -120,7 +120,11 @@ void LeastFrequentlyUsed(Proc* arrivalQueue) {
 
     // Free dynamic memory
     free(mem);
+    mem = NULL;
     free(readyQueue);
+    readyQueue = NULL;
     free(runningQueue);
+    runningQueue = NULL;
     free(finishQueue);
+    finishQueue = NULL;
 }
