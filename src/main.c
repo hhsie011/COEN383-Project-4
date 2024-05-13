@@ -85,6 +85,13 @@ int main() {
         LeastFrequentlyUsed(arrivalQueue[i]);
     }
 
+    // MFU
+    printf("=============================================================================\n");
+    printf("Most Frequently Used (MFU)\n");
+    for (int i = 0; i < NUM_SETS; ++i) {
+        MostFrequentlyUsed(arrivalQueue[i]);
+    }
+
 
     // Free dynamic allocated memory
     for (int i = 0; i < NUM_SETS; ++i) {
