@@ -8,12 +8,14 @@ void init(Memory* mem) {
     mem->freePages = NULL;
     Page* last = NULL;
     for (int i = 0; i < MEM_SIZE; ++i) {
+        mem->memMap[i] = '.';
         Page* p = malloc(sizeof(Page));
         p->number = -1;
         p->assignTime = -1;
         p->lastUsed = -1;
         p->refCnt = 0;
         p->next = NULL;
+        p->address = i;
         if (mem->freePages == NULL) {
             mem->freePages = p;
             last = p;
@@ -40,6 +42,7 @@ void assignPages(Memory* mem, Proc* proc) {
     Page* temp = mem->freePages;
     Page* prev = NULL;
     for (int i = 0; i < MAX_NUM_PAGE; ++i) {
+        mem->memMap[temp->address] = proc->name;
         prev = temp;
         temp = temp->next;
     }
@@ -58,6 +61,7 @@ void returnPages(Memory* mem, Proc* proc) {
         temp->assignTime = -1;
         temp->lastUsed = -1;
         temp->refCnt = 0;
+        mem->memMap[temp->address] = '.';
         prev = temp;
         temp = temp->next;
     }

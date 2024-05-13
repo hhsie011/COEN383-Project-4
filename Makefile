@@ -1,6 +1,6 @@
 all:
 	gcc -o main src/*.c
-	./main
+	./main > output.txt
 
 clean:
 	rm main

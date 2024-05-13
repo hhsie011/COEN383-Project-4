@@ -53,7 +53,7 @@ void LeastFrequentlyUsed(Proc* arrivalQueue, int shortSim, Stat* stat) {
             assignPages(mem, newJob->proc);
             addJob(runningQueue, newJob);
             if (!shortSim) {
-                printStart(newJob->proc, timeMsec);
+                printStart(newJob->proc, timeMsec, mem);
             }
             swaps++;
         }
@@ -112,7 +112,7 @@ void LeastFrequentlyUsed(Proc* arrivalQueue, int shortSim, Stat* stat) {
                     addJob(finishQueue, temp);
                     removeJob(runningQueue, temp);
                     if (!shortSim) {
-                        printCompletion(temp->proc, timeMsec);
+                        printCompletion(temp->proc, timeMsec, mem);
                     }
                     temp = nextJob;
                     continue;

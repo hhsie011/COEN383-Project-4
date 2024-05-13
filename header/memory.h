@@ -10,6 +10,7 @@ typedef struct Memory
 {
     Page* freePages;
     int numFreePages;
+    char memMap[MEM_SIZE];
 } Memory;
 
 void init(Memory*);
