@@ -4,8 +4,9 @@
 #include "../header/memory.h"
 #include "../header/algo.h"
 #include "../header/queue.h"
+#include "../header/output.h"
 
-void Random(Proc* arrivalQueue) {
+void Random(Proc* arrivalQueue, int shortSim, Stat* stat) {
     // Initialize virutal memory
     Memory* mem = malloc(sizeof(Memory));
     init(mem);
@@ -16,6 +17,7 @@ void Random(Proc* arrivalQueue) {
     int hits = 0;
     int misses = 0;
     int swaps = 0;
+    int references = 0;
 
     // Initialize ready queue
     Queue* readyQueue = malloc(sizeof(Queue));
@@ -29,7 +31,7 @@ void Random(Proc* arrivalQueue) {
     Queue* finishQueue = malloc(sizeof(Queue));
     finishQueue->head = NULL;
 
-    while (timeMsec <= SIM_TIME_SEC * SEC_TO_MSEC) {
+    while (timeMsec <= SIM_TIME_SEC * SEC_TO_MSEC && (!shortSim || references < SHORT_SIM)) {
         // Processes only arrive at the start of a second
         if (timeMsec % SEC_TO_MSEC == 0) {
             // Check if any processes arrive at this second
@@ -40,6 +42,7 @@ void Random(Proc* arrivalQueue) {
                 newJob->next = NULL;
                 // Insert new job into the ready queue
                 addJob(readyQueue, newJob);
+                
                 index++;
             }
         }
@@ -50,6 +53,9 @@ void Random(Proc* arrivalQueue) {
             removeJob(readyQueue, readyQueue->head);
             assignPages(mem, newJob->proc);
             addJob(runningQueue, newJob);
+            if (!shortSim) {
+                printStart(newJob->proc, timeMsec);
+            }
             swaps++;
         }
         
@@ -92,11 +98,15 @@ void Random(Proc* arrivalQueue) {
                     Job* nextJob = temp->next;
                     addJob(finishQueue, temp);
                     removeJob(runningQueue, temp);
+                    if (!shortSim) {
+                        printCompletion(temp->proc, timeMsec);
+                    }
                     temp = nextJob;
                     continue;
                 }
-                // Record time referenced
-                
+                if (++references >= SHORT_SIM && shortSim) {
+                    break;
+                }
                 // Get new page reference
                 temp->proc->pageRef = getNextRef(temp->proc->size, temp->proc->pageRef);
                 temp = temp->next;
@@ -105,10 +115,12 @@ void Random(Proc* arrivalQueue) {
         
         timeMsec += PERIOD_MSEC;
     }
-    printf("Hits: %d\n", hits);
-    printf("Misses: %d\n", misses);
-    printf("Swaps: %d\n\n", swaps);
-
+    // printf("Hits: %d\n", hits);
+    // printf("Misses: %d\n", misses);
+    // printf("Swaps: %d\n\n", swaps);
+    stat->hits = hits;
+    stat->misses = misses;
+    
     // Free dynamic memory
     free(mem);
     mem = NULL;

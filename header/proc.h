@@ -4,6 +4,8 @@
 #include "page.h"
 
 #define MAX_NUM_PAGE 4
+#define SEC_TO_MSEC 1000
+#define NUM_PROC 150
 
 typedef struct Proc {
     char name;
